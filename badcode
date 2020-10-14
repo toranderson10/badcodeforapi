@@ -1,0 +1,181 @@
+//let apiKey = 'pneeaLb2j2r8ZYdARlmzRaZGp6DG8ocO'
+let myPlayer, myPlayer2, myPlayer3, myPlayer4, myPlayer5, myPlayer6;
+let namez = [];
+let heightz = [];
+let poundz = [];
+let teamz = [];
+let sitionz = [];
+let tWidth;
+let m = [];
+let r;
+let g;
+let x=[];
+
+function setup() {
+  httpGet('https://www.balldontlie.io/api/v1/players', 'json', myCallback);
+
+  createCanvas(windowWidth,windowHeight);
+  //httpGet ('https://www.balldontlie.io/api/v1/stats?seasons[]=2018&seasons[]=2017&player_ids[]=1&player_ids[]=2&postseason=true',myCallback)
+// https://api.nytimes.com/svc/community/v3/user-content/url.json?api-key={pneeaLb2j2r8ZYdARlmzRaZGp6DG8ocO}&offset=0&url=https%3A%2F%2Fwww.nytimes.com%2F2019%2F06%2F21%2Fscience%2Fgiant-squid-cephalopod-video.html
+}
+
+function myCallback(result) {
+  console.log(result.data[0]);
+  console.log(result.data[1]);
+  console.log(result.data[2]);
+  console.log(result.data[3]);
+  console.log(result.data[4]);
+  console.log(result.data[5]);
+  console.log(typeof result);
+
+//i could probably make a parent class here but time is ticking
+  // myPlayer = result.data[0];
+  // myPlayer2 = result.data[1];
+  // myPlayer3 = result.data[2];
+  // myPlayer4 = result.data[3];
+  // myPlayer5 =result.data[4];
+  // myPlayer6 = result.data[5];
+}
+
+function draw(){
+
+  background(249, 224, 205);
+
+
+  //grid();
+
+  //data visualization
+  //I just want to use firstname, height_feet, weight_pounds, team.fullname, & position)
+  if (myPlayer){
+    console.log(myPlayer)
+    for (let d =0; d <myPlayer.length; d++){
+
+    namez[d] = myPlayer[d].first_name;
+    heightz [d] = myPlayer[d].height_feet;
+    poundz [d] = myPlayer[d].weight_pounds;
+    teamz [d] = myPlayer[d].team.fullname;
+    sitionz [d] = myPlayer[d].position;
+  tWidth = textWidth(myPlayer[d].first_name);
+
+//use map to show data according to height_feet
+
+m[d] = ellipse(heightz[d], 6, 10, 200, windowHeight-50);
+
+push();
+      fill(200);
+      noStroke();
+      text(first_name[d], x[d], y[d]);
+      r = map(heightz[d], 41, 100, 250, 100);
+      g = map (heightz[d], 41, 100, 100, 250);
+      fill(r,g,150,150);
+      ellipse(x[d] + (tWidth + 50), y[d], heightz[d]/2);
+      pop();
+
+      push();
+      fill(220);
+      noStroke();
+      textAlign(CENTER, CENTER);
+      text(first_name[d], x[d] + (tWidth + 50),y[d]);
+      pop();
+
+      //on hover, I want the description of the movie to appear
+      showDescription(d);
+
+    }
+  //}
+  //newData = false;
+}
+
+function myCallback(result){
+
+  myPlayer = result.data[0];
+  myPlayer2 = result.data[1];
+  myPlayer3 = result.data[2];
+  myPlayer4 = result.data[3];
+  myPlayer5 =result.data[4];
+  myPlayer6 = result.data[5];
+
+}
+
+function grid(){
+  //create grid for the timeline, 28 lines (from 1986 to 2014)
+  stroke(50);
+  line(100, 50, 100, windowHeight - 50);
+  for(d = 0; d <= 28; d++ ){
+    line(100, 50 + ((windowHeight-100)/28) * d, windowWidth - 50, 50 + ((windowHeight-100)/28) * d);
+
+    //add years to the grid
+    push();
+    noStroke();
+    fill(100);
+    textStyle(ITALIC);
+    text(50, 50 + ((windowHeight-100)/28) * d );
+    pop();
+  }
+
+// function showDescription(j){
+//     d = dist(mouseX, mouseY, x[j], y[j]);
+//     // I added absolute to increase the precision of the mouse over
+//     if(d < tWidth && abs(mouseY-y[i]) <= 10){
+//     //noStroke();
+//     fill(10);
+//     rect(x[j] - 10, y[j] - 10, 310, 120);
+//     fill(200);
+//     text(description[j], x[j], y[j], 300);
+//   }
+}
+//adding a title for funsies
+  textSize(25);
+  textFont('TimesNewRoman');
+  text('as they say: ball dont lie', 10, 20);
+  fill(100, 102, 153);
+
+  if (myPlayer){
+    console.log("it is working!")
+  }
+
+
+
+
+
+}
+  // let bballData = JSON.parse(result);
+  // let y = [];
+  // let x = [];
+  // let r;
+  // let g;
+  //
+  //for (i = 0; i < bballData.length; i++){
+  //visitorScore[i] = bballData[i].visitor_team_score;
+  //date[i] = bballData[i].date;
+  //hometeamScore[i] = bballData[i].home_team_score;
+
+
+
+//  console.log(result);
+
+  //myData = result
+
+//let myKeys = Object.keys(result);
+
+//console.log(myKeys)
+
+
+  //game = result;
+//}
+//object.data.visitor_team_score
+//object.data.home_team_score
+//function myCallback(result){
+//  console.log(result);
+//  console.log(typeof result);
+
+  //let myKeys = Object.keys(result.meta.total_count);
+
+  //console.log(myKeys);
+  // console.log(JSON.parse(result));
+  //
+  // let rParsed = JSON.parse(result);
+  //
+  // let myKeys = Object.keys(rParsed);
+  //
+  // console.log(rParsed[myKeys[0]])
