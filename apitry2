@@ -1,0 +1,101 @@
+//let apiKey = 'pneeaLb2j2r8ZYdARlmzRaZGp6DG8ocO'
+let myPlayer;
+let namez = [];
+let heightz = [];
+let poundz = [];
+let teamz = [];
+let sitionz = [];
+let tWidth;
+// let m = [];
+// let r;
+// let g;
+// let x=[];
+
+function setup() {
+  httpGet('https://www.balldontlie.io/api/v1/players', 'json', myCallback);
+
+  createCanvas(windowWidth,windowHeight);
+  //httpGet ('https://www.balldontlie.io/api/v1/stats?seasons[]=2018&seasons[]=2017&player_ids[]=1&player_ids[]=2&postseason=true',myCallback)
+// https://api.nytimes.com/svc/community/v3/user-content/url.json?api-key={pneeaLb2j2r8ZYdARlmzRaZGp6DG8ocO}&offset=0&url=https%3A%2F%2Fwww.nytimes.com%2F2019%2F06%2F21%2Fscience%2Fgiant-squid-cephalopod-video.html
+}
+
+function myCallback(result) {
+  console.log(result.data[0]);
+  console.log(result.data[1]);
+  console.log(result.data[2]);
+  console.log(result.data[3]);
+  console.log(result.data[4]);
+  console.log(result.data[5]);
+  console.log(typeof result);
+
+//i could probably make a parent class here but time is ticking
+
+  myPlayer = result.data[0];
+  namez = result.data[0].first_name;
+  heightz = result.data[0].height_feet;
+  poundz = result.data[0].weight_pounds;
+  teamz = result.data[0].team.full_name;
+  sitionz = result.data[0].position;
+
+}
+
+
+function draw(){
+
+if (myData != undefined){
+  		phraseCount = 0;
+  		for (let d = 0; d < myData.length; d++){
+  			if (myData[d].abstract.search(phrase) >= 0){
+  				phraseCount++;
+  			}
+  		}
+
+  		console.log(phraseCount);
+
+  		newData = false;
+  	}
+
+  	fill(255%phraseCount,100,200);
+  	ellipse(width/2,height/2, phraseCount,phraseCount);
+  }
+
+  function myCallback(result){
+  	console.log(result);
+  	console.log(typeof result);
+  	
+  	console.log(result.response.docs[0].abstract);
+
+  	myData = result.response.docs;
+
+  	let myKeys = Object.keys(result.response.docs);
+
+
+  	console.log(myKeys);
+
+  	newData = true;
+
+
+
+
+
+  background(249, 224, 205);
+  textSize(25);
+  textFont('TimesNewRoman');
+  text('as they say: ball dont lie', 10, 20);
+  fill(100, 102, 153);
+  //make a grid
+  for (let z = 0; z < width; z += width / 10) {
+  for (let m = 0; m < height; m += height / 5) {
+    stroke(0);
+    strokeWeight(1);
+    line(z, 0, z, height);
+    line(0, m, width, m);
+
+    if (myPlayer){
+      for (let d =0; d <myPlayer.length; d++){
+      show([d])  
+}
+}
+}
+}
+}
